@@ -39,6 +39,12 @@
             android:title="@string/status_bar_toggle_brightness"
             android:summary="@string/status_bar_toggle_brightness_summary"
             android:defaultValue="false" />
+ 
+        <!-- Network usage stats -->
+        <PreferenceScreen
+            android:key="network_usage_stats"
+            android:fragment="com.android.settings.djl.NetworkUsageStats"
+            android:title="@string/status_bar_network_cat" /> 
 
     </PreferenceCategory>
 
