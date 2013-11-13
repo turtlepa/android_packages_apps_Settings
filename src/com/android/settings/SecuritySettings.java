@@ -94,6 +94,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String LOCK_BEFORE_UNLOCK = "lock_before_unlock";
     private static final String KEY_ADVANCED_REBOOT = "advanced_reboot";
     private static final String MENU_UNLOCK_PREF = "menu_unlock";
+    private static final String KEY_SEE_THROUGH = "see_through";
 
     private static final String LOCKSCREEN_NOTIFICATIONS = "lockscreen_notifications";
     private static final String LOCKSCREEN_NOTIFICATIONS_POCKET_MODE = "lockscreen_notifications_pocket_mode";
@@ -165,6 +166,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private CheckBoxPreference mMenuUnlock;
     private ListPreference mLockscreenRotation;
     private CheckBoxPreference mBatteryStatus;
+    private CheckBoxPreference mSeeThrough;
 
     private CheckBoxPreference mLockscreenNotifications;
     private ListPreference mLockscreenNotificationsPocketMode;
@@ -298,6 +300,13 @@ public class SecuritySettings extends RestrictedSettingsFragment
         if (mLockAfter != null) {
             setupLockAfterPreference();
             updateLockAfterPreferenceSummary();
+        }
+
+        // lockscreen see through
+        mSeeThrough = (CheckBoxPreference) root.findPreference(KEY_SEE_THROUGH);
+        if (mSeeThrough != null) {
+            mSeeThrough.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_SEE_THROUGH, 0) == 1);
         }
 
         // biometric weak liveliness
@@ -927,6 +936,9 @@ public class SecuritySettings extends RestrictedSettingsFragment
             } else {
                 setNonMarketAppsAllowed(false);
             }
+        } else if (preference == mSeeThrough) {
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH,
+                    mSeeThrough.isChecked() ? 1 : 0);
         } else if (KEY_TOGGLE_VERIFY_APPLICATIONS.equals(key)) {
             Settings.Global.putInt(getContentResolver(), Settings.Global.PACKAGE_VERIFIER_ENABLE,
                     mToggleVerifyApps.isChecked() ? 1 : 0);
