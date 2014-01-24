@@ -140,9 +140,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
 
-    private static final String ROOT_ACCESS_KEY = "root_access";
-    private static final String ROOT_ACCESS_PROPERTY = "persist.sys.root_access";
-
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
@@ -215,10 +212,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mOverlayDisplayDevices;
     private ListPreference mOpenGLTraces;
 
-    private ListPreference mRootAccess;
-    private Object mSelectedRootValue;
-    private PreferenceScreen mDevelopmentTools;
-
     private CheckBoxPreference mImmediatelyDestroyActivities;
     private ListPreference mAppProcessLimit;
 
@@ -238,8 +231,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private Dialog mEnableDialog;
     private Dialog mAdbDialog;
     private Dialog mAdbKeysDialog;
-
-    private Dialog mRootDialog;
 
     private boolean mUnavailable;
 
@@ -355,12 +346,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             removePreferenceForProduction(hdcpChecking);
         }
 
-        mRootAccess = (ListPreference) findPreference(ROOT_ACCESS_KEY);
-        mRootAccess.setOnPreferenceChangeListener(this);
-        if (!removeRootOptionsIfRequired()) {
-            mAllPrefs.add(mRootAccess);
-        }
-
         mChamber = (Preference) findPreference(KEY_CHAMBER_OF_SECRETS);
         mAllPrefs.add(mChamber);
         mChamberUnlocked =
@@ -401,18 +386,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mAllPrefs.add(pref);
         mResetCbPrefs.add(pref);
         return pref;
-    }
-
-
-    private boolean removeRootOptionsIfRequired() {
-        // user builds don't get root, and eng always gets root
-        if (!Build.IS_DEBUGGABLE || "eng".equals(Build.TYPE)) {
-            if (mRootAccess != null) {
-                getPreferenceScreen().removePreference(mRootAccess);
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
@@ -576,7 +549,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateBugreportOptions();
         updateForceRtlOptions();
         updateWifiDisplayCertificationOptions();
-        updateRootAccessOptions();
     }
 
     private void resetDangerousOptions() {
@@ -598,7 +570,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateAllOptions();
         mDontPokeProperties = false;
         pokeSystemProperties();
-        resetRootAccessOptions();
     }
 
     void filterRuntimeOptions(Preference selectRuntime) {
@@ -646,40 +617,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             selectRuntime.setSummary(summaries[index]);
             selectRuntime.setOnPreferenceChangeListener(this);
         }
-    }
-
-    private void updateRootAccessOptions() {
-        String value = SystemProperties.get(ROOT_ACCESS_PROPERTY, mUnofficialBuild ? "1" : "0");
-        mRootAccess.setValue(value);
-        mRootAccess.setSummary(getResources()
-                .getStringArray(R.array.root_access_entries)[Integer.valueOf(value)]);
-    }
-
-    private void writeRootAccessOptions(Object newValue) {
-        String oldValue = SystemProperties.get(ROOT_ACCESS_PROPERTY, mUnofficialBuild ? "1" : "0");
-        SystemProperties.set(ROOT_ACCESS_PROPERTY, newValue.toString());
-        if (Integer.valueOf(newValue.toString()) < 2 && !oldValue.equals(newValue)
-                && "1".equals(SystemProperties.get("service.adb.root", "0"))) {
-            SystemProperties.set("service.adb.root", "0");
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.ADB_ENABLED, 0);
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.ADB_ENABLED, 1);
-        }
-        updateRootAccessOptions();
-    }
-
-    private void resetRootAccessOptions() {
-        String oldValue = SystemProperties.get(ROOT_ACCESS_PROPERTY, mUnofficialBuild ? "1" : "0");
-        SystemProperties.set(ROOT_ACCESS_PROPERTY, "0");
-        if (!oldValue.equals("1") && "1".equals(SystemProperties.get("service.adb.root", "0"))) {
-            SystemProperties.set("service.adb.root", "0");
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.ADB_ENABLED, 0);
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.ADB_ENABLED, 1);
-        }
-        updateRootAccessOptions();
     }
 
     private void updateHdcpValues() {
@@ -1456,25 +1393,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         } else if (preference == mAppProcessLimit) {
             writeAppProcessLimitOptions(newValue);
             return true;
-        } else if (preference == mRootAccess) {
-            if ("0".equals(SystemProperties.get(ROOT_ACCESS_PROPERTY, mUnofficialBuild ? "1" : "0"))
-                    && !"0".equals(newValue)) {
-                mSelectedRootValue = newValue;
-                mDialogClicked = false;
-                if (mRootDialog != null) {
-                    dismissDialogs();
-                }
-                mRootDialog = new AlertDialog.Builder(getActivity())
-                        .setMessage(getResources().getString(R.string.root_access_warning_message))
-                        .setTitle(R.string.root_access_warning_title)
-                        .setIconAttribute(android.R.attr.alertDialogIcon)
-                        .setPositiveButton(android.R.string.yes, this)
-                        .setNegativeButton(android.R.string.no, this).show();
-                mRootDialog.setOnDismissListener(this);
-            } else {
-                writeRootAccessOptions(newValue);
-            }
-            return true;
         } else if (preference == mChamberUnlocked) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.CHAMBER_OF_SECRETS,
@@ -1496,10 +1414,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (mEnableDialog != null) {
             mEnableDialog.dismiss();
             mEnableDialog = null;
-        }
-        if (mRootDialog != null) {
-            mRootDialog.dismiss();
-            mRootDialog = null;
         }
     }
 
@@ -1540,13 +1454,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit()
                     .putBoolean(PREF_SHOW, true)
                     .apply();
-            }
-        } else if (dialog == mRootDialog) {
-            if (which == DialogInterface.BUTTON_POSITIVE) {
-                writeRootAccessOptions(mSelectedRootValue);
             } else {
-                // Reset the option
-                writeRootAccessOptions("0");
+                // Reset the toggle
+                mEnabledSwitch.setChecked(false);
             }
         }
     }
