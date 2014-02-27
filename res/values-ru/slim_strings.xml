@@ -1031,6 +1031,10 @@
     <string name="pie_disable_ime_triggers_title">Отключить срабатывание на клавиатуре</string>
     <string name="pie_disable_ime_triggers_summary">Отключает или уменьшает размер области срабатывания в зоне клавиатуры, когда клавиатура открыта</string>
 
+    <!-- Network activity arrows -->
+    <string name="show_network_activity">Стрелки сетевой активности</string>
+    <string name="show_network_activity_summary">Показывать стрелки на значках сети при сетевой активности</string>
+
     <!-- Notification Reminders -->
     <string name="noti_reminder_category">Напоминание уведомления</string>
     <string name="noti_reminder_enable_title">Включить напоминание уведомления</string>
