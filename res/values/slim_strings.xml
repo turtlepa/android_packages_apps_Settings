@@ -1280,4 +1280,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Device specific settings -->
     <string name="screen_off_gesture_settings_title">Screen off gestures</string>
 
+    <!-- Network activity arrows -->
+    <string name="show_network_activity">Network activity arrows</string>
+    <string name="show_network_activity_summary">Show network activity arrows on network icons</string>
+
 </resources>
