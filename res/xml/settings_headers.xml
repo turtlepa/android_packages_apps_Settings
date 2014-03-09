@@ -230,6 +230,17 @@
         android:icon="@*android:drawable/ic_print"
         android:title="@string/print_settings" />
 
+    <!-- TricksterMod -->
+    <header
+        android:id="@+id/trickstermod_settings"
+        android:icon="@drawable/ic_settings_performance"
+        android:title="@string/trickstermod_title">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.bigeyes0x0.trickstermod"
+            android:targetClass="com.bigeyes0x0.trickstermod.main.ActivityTricksterMod" />
+    </header>
+
     <!-- Development -->
     <header
         android:id="@+id/development_settings"
