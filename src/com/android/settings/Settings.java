@@ -653,6 +653,15 @@ public class Settings extends PreferenceActivity
                 if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
                     target.remove(i);
                 }
+            } else if (id == R.id.trickstermod_settings) {
+                boolean supported = false;
+                try {
+                    supported = (getPackageManager().getPackageInfo("com.bigeyes0x0.trickstermod", 0).versionCode >= 1);
+                } catch (PackageManager.NameNotFoundException e) {
+                }
+                if (!supported) {
+                    target.remove(i);
+                }
             }
 
             if (i < target.size() && target.get(i) == header
