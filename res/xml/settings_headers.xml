@@ -241,6 +241,28 @@
             android:targetClass="com.bigeyes0x0.trickstermod.main.ActivityTricksterMod" />
     </header>
 
+    <!-- FauxClock -->
+    <header
+        android:id="@+id/fauxclock_settings"
+        android:icon="@drawable/ic_settings_performance"
+        android:title="@string/fauxclock_title">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.teamkang.fauxclock"
+            android:targetClass="com.teamkang.fauxclock.activities.InitialAppActivity" />
+    </header>
+
+    <!-- FauxSound -->
+    <header
+        android:id="@+id/fauxsound_settings"
+        android:icon="@drawable/ic_settings_sound"
+        android:title="@string/fauxsound_title">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.teamkang.fauxsound"
+            android:targetClass="com.teamkang.fauxsound.activities.InitialAppActivity" />
+    </header>
+
     <!-- Development -->
     <header
         android:id="@+id/development_settings"

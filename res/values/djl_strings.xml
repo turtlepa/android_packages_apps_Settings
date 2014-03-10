@@ -20,5 +20,11 @@
 
     <!-- TricksterMod header -->
     <string name="trickstermod_title">TricksterMod</string>
+ 
+    <!-- FauxClock header -->
+    <string name="fauxclock_title">FauxClock</string>
+
+    <!-- FauxSound header -->
+    <string name="fauxsound_title">FauxSound</string>
 
 </resources>
