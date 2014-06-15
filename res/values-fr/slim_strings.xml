@@ -1257,4 +1257,27 @@ contrôle additionnel. \'Retirer\' supprime la ligne sélectionnée.
     <!-- Device specific settings -->
     <string name="screen_off_gesture_settings_title">Gestes écran éteint</string>
 
+    <!-- Lockscreen Notifications -->
+    <string name="lockscreen_notifications">Notifications rapides</string>
+    <string name="lockscreen_notifications_summary">Affiche les notifications en attente sur l\'écran de verrouillage.</string>
+    <string name="pocket_mode">Mode poche</string>
+    <string name="pocket_mode_modes_alwayson">Toujours activé</string>
+    <string name="pocket_mode_modes_alwayson_summary">L\'écran s\'allume lorsque l\'appareil est sorti d\'une poche, et s\'éteint si placé dans une poche.</string>
+    <string name="pocket_mode_modes_unreadnotificationsonly">Notif. non-lue(s) seulement</string>
+    <string name="pocket_mode_modes_unreadnotificationsonly_summary">L\'écran s\'allume lorsque l\'appareil est sorti d\'une poche avec la présence de notifications non-lues.</string>
+    <string name="pocket_mode_modes_disabled">Désactivé</string>
+    <string name="wake_on_notification">Réveil lors d\'une notification</string>
+    <string name="wake_on_notification_summary">Allume l\'écran de l\'appareil lorsqu\'une notification est reçue.</string>
+    <string name="notifications_height">Nombre de notifications</string>
+    <string name="notifications_height_summary">Nombre maximum de notifications affichées.</string>
+    <string name="lockscreen_notifications_color">Fond des notifications</string>
+    <string name="lockscreen_notifications_color_summary">Couleur du fond des notifications.</string>
+    <string name="lockscreen_notifications_type">Notifications à afficher</string>
+    <string name="lockscreen_notification_types_nonclearable">Persistantes</string>
+    <string name="lockscreen_notification_types_lowpriority">À basse priorité</string>
+    <string name="lockscreen_notifications_excluded_apps_title">Applications exclues</string>
+    <string name="lockscreen_notifications_excluded_apps_summary">Les notifications des applications exclues ne seront pas affichées sur l\'écran de verrouillage.</string>
+    <string name="privacy_mode">Mode sécurisé</string>
+    <string name="privacy_mode_summary">Désactive l\'affichage et la suppression des notifications. Seuls les icônes de celles-ci seront visibles.</string>
+
 </resources>

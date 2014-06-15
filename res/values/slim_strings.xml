@@ -1287,4 +1287,27 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="show_network_activity">Network activity arrows</string>
     <string name="show_network_activity_summary">Show network activity arrows on network icons</string>
 
+    <!-- Lockscreen Notifications -->
+    <string name="lockscreen_notifications">Lockscreen notifications</string>
+    <string name="lockscreen_notifications_summary">Show pending notifications on lockscreen</string>
+    <string name="pocket_mode">Pocket mode</string>
+    <string name="pocket_mode_modes_alwayson">Always On</string>
+    <string name="pocket_mode_modes_alwayson_summary">Your screen is turned on to show all notifications when device is pulled out of pocket, and is turned off if it gets back into pocket.</string>
+    <string name="pocket_mode_modes_unreadnotificationsonly">Unread notifications only</string>
+    <string name="pocket_mode_modes_unreadnotificationsonly_summary">Your screen is turned on when device is pulled out of pocket with unread notifications, and is turned off if it gets back into pocket.</string>
+    <string name="pocket_mode_modes_disabled">Disabled</string>
+    <string name="wake_on_notification">Wake on notification</string>
+    <string name="wake_on_notification_summary">Wake device when a new notification is received</string>
+    <string name="notifications_height">Notification count</string>
+    <string name="notifications_height_summary">Number of notifications displayed at once</string>
+    <string name="lockscreen_notifications_color">Notification background color</string>
+    <string name="lockscreen_notifications_color_summary">Color of the lockscreen notifications</string>
+    <string name="lockscreen_notifications_type">Notification types to display</string>
+    <string name="lockscreen_notification_types_nonclearable">Non clearable</string>
+    <string name="lockscreen_notification_types_lowpriority">Low Priority</string>
+    <string name="lockscreen_notifications_excluded_apps_title">Excluded Applications</string>
+    <string name="lockscreen_notifications_excluded_apps_summary">Excluded applications will not show notifications on lockscreen</string>
+    <string name="privacy_mode">Privacy mode</string>
+    <string name="privacy_mode_summary">Disables notifications from being shown and dismissed. This way, you just see the icons of your notifications.</string>
+
 </resources>
