@@ -1283,6 +1283,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Bluetooth accept all Filestypes -->
     <string name="bluetooth_accept_all_files">Accept all file types</string>
 
+    <!-- Double tap gesture -->
+    <string name="status_bar_double_tap_gesture_title">Double tap gesture</string>
+    <string name="status_bar_double_tap_gesture_summary">Enable double tap on status bar to turn off the screen</string>
+
     <!-- Network activity arrows -->
     <string name="show_network_activity">Network activity arrows</string>
     <string name="show_network_activity_summary">Show network activity arrows on network icons</string>

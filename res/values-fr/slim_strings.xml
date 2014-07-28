@@ -1257,6 +1257,10 @@ contrôle additionnel. \'Retirer\' supprime la ligne sélectionnée.
     <!-- Device specific settings -->
     <string name="screen_off_gesture_settings_title">Gestes écran éteint</string>
 
+    <!-- Double tap gesture -->
+    <string name="status_bar_double_tap_gesture_title">Verrouillage rapide</string>
+    <string name="status_bar_double_tap_gesture_summary">Active la possibilité de verrouiller l\'appareil via un double appui sur la barre d\'état.</string>
+
     <!-- Lockscreen Notifications -->
     <string name="lockscreen_notifications">Notifications rapides</string>
     <string name="lockscreen_notifications_summary">Affiche les notifications en attente sur l\'écran de verrouillage.</string>
