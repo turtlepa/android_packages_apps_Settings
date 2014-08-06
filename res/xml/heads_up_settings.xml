@@ -29,6 +29,13 @@
         android:selectable="false" />
 
     <CheckBoxPreference
+        android:key="heads_up_exclude_from_lock_screen"
+        android:title="@string/heads_up_exclude_from_lock_screen"
+        android:persistent="false"
+        android:dependency="heads_up_master_switch"
+        android:defaultValue="false" />
+
+    <CheckBoxPreference
         android:key="heads_up_expanded"
         android:title="@string/heads_up_expanded_title"
         android:summary="@string/heads_up_expanded_summary"
