@@ -84,6 +84,12 @@
             android:entryValues="@array/values_system_power_crt_mode" />
 
         <PreferenceScreen
+	    android:key="overscroll_effects"
+	    android:title="@string/ui_overscroll_title"
+	    android:summary="@string/overscroll_weight_summary"
+	    android:fragment="com.android.settings.djl.OverscrollEffects" />
+
+        <PreferenceScreen
             android:id="@+id/animations"  
             android:title="@string/title_animation_controls"  
             android:summary="@string/header_summary_animation"  
