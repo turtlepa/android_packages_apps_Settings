@@ -60,12 +60,14 @@ public class HeadsUp extends SettingsPreferenceFragment
             "heads_up_bg_color";
     private static final String HEADS_UP_TEXT_COLOR =
             "heads_up_text_color";
+    private static final String PREF_HEADS_UP_MASTER_SWITCH = "heads_up_master_switch";
 
     ListPreference mHeadsUpSnoozeTime;
     ListPreference mHeadsUpTimeOut;
     CheckBoxPreference mHeadsUpExpanded;
     CheckBoxPreference mHeadsUpShowUpdates;
     CheckBoxPreference mHeadsUpGravity;
+    CheckBoxPreference mHeadsUpMasterSwitch;
 
     private ColorPickerPreference mHeadsUpBgColor;
     private ColorPickerPreference mHeadsUpTextColor;
@@ -83,6 +85,11 @@ public class HeadsUp extends SettingsPreferenceFragment
         PreferenceScreen prefs = getPreferenceScreen();
 
         PackageManager pm = getPackageManager();
+
+        mHeadsUpMasterSwitch = (CheckBoxPreference) findPreference(PREF_HEADS_UP_MASTER_SWITCH);
+        mHeadsUpMasterSwitch.setChecked(Settings.System.getIntForUser(getContentResolver(),
+                Settings.System.HEADS_UP_MASTER_SWITCH, 0, UserHandle.USER_CURRENT) == 1);
+        mHeadsUpMasterSwitch.setOnPreferenceChangeListener(this);
 
         mHeadsUpExpanded = (CheckBoxPreference) findPreference(PREF_HEADS_UP_EXPANDED);
         mHeadsUpExpanded.setChecked(Settings.System.getIntForUser(getContentResolver(),
@@ -155,7 +162,12 @@ public class HeadsUp extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mHeadsUpSnoozeTime) {
+        if (preference == mHeadsUpMasterSwitch) {
+            Settings.System.putIntForUser(getContentResolver(),
+                    Settings.System.HEADS_UP_MASTER_SWITCH,
+                    (Boolean) newValue ? 1 : 0, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mHeadsUpSnoozeTime) {
             int headsUpSnoozeTime = Integer.valueOf((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.HEADS_UP_SNOOZE_TIME,
