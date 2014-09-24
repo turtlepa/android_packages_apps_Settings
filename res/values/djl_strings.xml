@@ -51,4 +51,8 @@
     <string name="custom_recent_title">Switch Recents styles</string>
     <string name="custom_recent_summary">Tick to Slim recents or untick for stock recents. TICKING OR UNTICKING THIS BOX WILL RESTART YOUR SYSTEMUI</string>
 
+    <!-- Heads up master switch -->
+    <string name="heads_up_master_switch">Heads up master switch</string>
+    <string name="heads_up_note_title">Important</string>
+    <string name="heads_up_note_summary">The checkbox above will enable Heads Up but you need to go into Settings -> Apps and pick each application that will receive notifications through Heads Up mode</string>
 </resources>
