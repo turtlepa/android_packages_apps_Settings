@@ -662,6 +662,15 @@ public class Settings extends PreferenceActivity
                 if (!supported) {
                     target.remove(i);
                 }
+            } else if (id == R.id.fku_settings) {
+                boolean supported = false;
+                try {
+                    supported = (getPackageManager().getPackageInfo("com.franco.kernel", 0).versionCode >= 1);
+                } catch (PackageManager.NameNotFoundException e) {
+                }
+                if (!supported) {
+                    target.remove(i);
+                }
             } else if (id == R.id.fauxclock_settings) {
                 boolean supported = false;
                 try {

@@ -241,6 +241,17 @@
             android:targetClass="com.bigeyes0x0.trickstermod.main.ActivityTricksterMod" />
     </header>
 
+    <!-- FKU -->
+    <header
+        android:id="@+id/fku_settings"
+        android:icon="@drawable/ic_settings_performance"
+        android:title="@string/fku_title">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.franco.kernel"
+            android:targetClass="com.franco.kernel.WelcomeScreenPager" />
+    </header>
+
     <!-- FauxClock -->
     <header
         android:id="@+id/fauxclock_settings"
