@@ -403,7 +403,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
                 LOCKSCREEN_NOTIFICATIONS_POCKET_MODE);
         if (mLockscreenNotificationsPocketMode != null) {
             final int pocketModeValue = Settings.System.getIntForUser(getContentResolver(),
-                    Settings.System.POCKET_MODE, 2, UserHandle.USER_CURRENT);
+                    Settings.System.LOCKSCREEN_NOTIFICATIONS_POCKET_MODE, 2, UserHandle.USER_CURRENT);
             mLockscreenNotificationsPocketMode.setValue(String.valueOf(pocketModeValue));
             mLockscreenNotificationsPocketMode.setOnPreferenceChangeListener(this);
         }
