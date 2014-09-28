@@ -251,7 +251,7 @@
             android:targetClass="com.bigeyes0x0.trickstermod.main.ActivityTricksterMod" />
     </header>
 
-    <!-- FKU -->
+    <!-- Franco kernel -->
     <header
         android:id="@+id/fku_settings"
         android:icon="@drawable/ic_settings_performance"
@@ -259,7 +259,7 @@
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="com.franco.kernel"
-            android:targetClass="com.franco.kernel.WelcomeScreenPager" />
+            android:targetClass="com.franco.kernel.WelcomeScreens.WelcomeScreenPager" />
     </header>
 
     <!-- FauxClock -->
