@@ -45,6 +45,8 @@ import com.android.internal.util.slim.DeviceUtils;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
+import com.android.settings.util.Helpers;
+
 public class RecentPanel extends SettingsPreferenceFragment implements DialogCreatable,
         Preference.OnPreferenceChangeListener {
 
@@ -65,6 +67,7 @@ public class RecentPanel extends SettingsPreferenceFragment implements DialogCre
             "recent_card_bg_color";
     private static final String RECENT_CARD_TEXT_COLOR =
             "recent_card_text_color";
+    private static final String CUSTOM_RECENT_MODE = "custom_recent_mode";
 
     private CheckBoxPreference mRecentsShowTopmost;
     private CheckBoxPreference mRecentPanelLeftyMode;
@@ -73,6 +76,7 @@ public class RecentPanel extends SettingsPreferenceFragment implements DialogCre
     private ColorPickerPreference mRecentPanelBgColor;
     private ColorPickerPreference mRecentCardBgColor;
     private ColorPickerPreference mRecentCardTextColor;
+    private CheckBoxPreference mRecentsCustom;
 
     private static final int MENU_RESET = Menu.FIRST;
     private static final int DEFAULT_BACKGROUND_COLOR = 0x00ffffff;
@@ -85,7 +89,14 @@ public class RecentPanel extends SettingsPreferenceFragment implements DialogCre
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mRecentPanelScale) {
+        if (preference == mRecentsCustom) { // Enable||disbale Slim Recent
+            Settings.System.putBoolean(getActivity().getContentResolver(),
+                    Settings.System.CUSTOM_RECENT_TOGGLE,
+                    ((Boolean) newValue) ? true : false);
+            updateRecentsOptions();
+            Helpers.restartSystemUI();
+            return true;
+        } else if (preference == mRecentPanelScale) {
             int value = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.RECENT_PANEL_SCALE_FACTOR, value);
@@ -152,6 +163,7 @@ public class RecentPanel extends SettingsPreferenceFragment implements DialogCre
     public void onResume() {
         super.onResume();
         updateRecentPanelPreferences();
+        updateRecentsOptions();
     }
 
     @Override
@@ -265,6 +277,12 @@ public class RecentPanel extends SettingsPreferenceFragment implements DialogCre
         mRecentsShowTopmost = (CheckBoxPreference) findPreference(RECENT_PANEL_SHOW_TOPMOST);
         mRecentsShowTopmost.setChecked(enableRecentsShowTopmost);
         mRecentsShowTopmost.setOnPreferenceChangeListener(this);
+
+        boolean enableRecentsCustom = Settings.System.getBoolean(getContentResolver(),
+                                      Settings.System.CUSTOM_RECENT_TOGGLE, false);
+        mRecentsCustom = (CheckBoxPreference) findPreference(CUSTOM_RECENT_MODE);
+        mRecentsCustom.setChecked(enableRecentsCustom);
+        mRecentsCustom.setOnPreferenceChangeListener(this);
 
         mRecentPanelLeftyMode =
                 (CheckBoxPreference) findPreference(RECENT_PANEL_LEFTY_MODE);
