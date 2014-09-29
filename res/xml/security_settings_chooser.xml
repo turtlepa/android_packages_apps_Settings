@@ -74,11 +74,6 @@
             android:key="owner_info_settings"
             android:title="@string/owner_info_settings_title"
             android:summary="@string/owner_info_settings_summary"/>
-        
-	<PreferenceScreen
-            android:key="hfm_settings"
-            android:fragment="com.android.settings.crom.hfm.HfmSettings"
-            android:title="@string/hfm_pref_screen_title" />
 
     </PreferenceCategory>
 
