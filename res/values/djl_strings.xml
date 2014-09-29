@@ -46,5 +46,9 @@
     <string name="summary_animation_no_override">Prevent apps from overriding transitions.</string>  
     <string name="animation_duration_default">Default</string>
     <string name="header_summary_animation">@null</string>
+     
+    <!-- Custom Recent Settings -->
+    <string name="custom_recent_title">Switch Recents styles</string>
+    <string name="custom_recent_summary">Tick to Slim recents or untick for stock recents. TICKING OR UNTICKING THIS BOX WILL RESTART YOUR SYSTEMUI</string>
 
 </resources>
