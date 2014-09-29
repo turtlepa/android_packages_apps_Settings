@@ -40,11 +40,10 @@
             android:summary="@string/status_bar_toggle_brightness_summary"
             android:defaultValue="false" />
  
-        <!-- Network usage stats -->
-        <PreferenceScreen
-            android:key="network_usage_stats"
-            android:fragment="com.android.settings.djl.NetworkUsageStats"
-            android:title="@string/status_bar_network_cat" /> 
+        <CheckBoxPreference
+            android:key="status_bar_double_tap_gesture"
+            android:title="@string/status_bar_double_tap_gesture_title"
+            android:summary="@string/status_bar_double_tap_gesture_summary" /> 
 
         <CheckBoxPreference
             android:key="network_activity_arrows"
@@ -52,10 +51,10 @@
             android:summary="@string/show_network_activity_summary"
             android:defaultValue="false" />
 
-        <CheckBoxPreference
-            android:key="status_bar_double_tap_gesture"
-            android:title="@string/status_bar_double_tap_gesture_title"
-            android:summary="@string/status_bar_double_tap_gesture_summary" />
+        <PreferenceScreen
+            android:key="network_usage_stats"
+            android:fragment="com.android.settings.djl.NetworkUsageStats"
+            android:title="@string/status_bar_network_cat" />
 
     </PreferenceCategory>
 
