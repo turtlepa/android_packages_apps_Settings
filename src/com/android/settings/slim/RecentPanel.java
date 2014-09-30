@@ -93,7 +93,6 @@ public class RecentPanel extends SettingsPreferenceFragment implements DialogCre
             Settings.System.putBoolean(getActivity().getContentResolver(),
                     Settings.System.CUSTOM_RECENT_TOGGLE,
                     ((Boolean) newValue) ? true : false);
-            updateRecentsOptions();
             Helpers.restartSystemUI();
             return true;
         } else if (preference == mRecentPanelScale) {
@@ -163,7 +162,6 @@ public class RecentPanel extends SettingsPreferenceFragment implements DialogCre
     public void onResume() {
         super.onResume();
         updateRecentPanelPreferences();
-        updateRecentsOptions();
     }
 
     @Override
