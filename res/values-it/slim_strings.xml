@@ -20,7 +20,6 @@
     <string name="reset">Reset</string>
     <string name="attention">Attenzione</string>
     <string name="enabled">Attivato</string>
-    <string name="disabled">Disattivato</string>
     <string name="default_string">Default</string>
     <string name="additional_options_title">Opzioni aggiuntive</string>
     <string name="reset_message">Resettare tutte le voci a default?</string>

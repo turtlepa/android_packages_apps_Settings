@@ -20,7 +20,6 @@
     <string name="reset">Visszaállítás</string>
     <string name="attention">Figyelmeztetés</string>
     <string name="enabled">Engedélyez</string>
-    <string name="disabled">Tiltva</string>
     <string name="default_string">Alapértelmezett</string>
     <string name="additional_options_title">További beállítások</string>
     <string name="reset_message">Mindent visszaállítasz alaphelyzetbe?</string>

@@ -20,7 +20,6 @@
     <string name="reset">Réinitialiser</string>
     <string name="attention">Attention</string>
     <string name="enabled">Activé</string>
-    <string name="disabled">Désactivé</string>
     <string name="default_string">Par défaut</string>
     <string name="additional_options_title">Options additionnelles</string>
     <string name="reset_message">Rétablir les valeurs par défaut ?</string>

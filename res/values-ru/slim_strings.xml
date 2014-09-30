@@ -687,7 +687,6 @@
     <string name="reset">Сброс</string>
     <string name="attention">Внимание</string>
     <string name="enabled">Включено</string>
-    <string name="disabled">Отключено</string>
     <string name="default_string">По умолчанию</string>
     <string name="reset_message">Сбросить все настройки по умолчанию?</string>
     <string name="style_title">Стиль</string>
