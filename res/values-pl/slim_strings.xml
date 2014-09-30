@@ -20,7 +20,6 @@
     <string name="reset">Przywróć</string>
     <string name="attention">Uwaga</string>
     <string name="enabled">Włączone</string>
-    <string name="disabled">Wyłączone</string>
     <string name="default_string">Domyślne</string>
     <string name="additional_options_title">Dodatkowe opcje</string>
     <string name="reset_message">Przywrócić wartości domyślne?</string>
