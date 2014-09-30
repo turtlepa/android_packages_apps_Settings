@@ -111,7 +111,7 @@
             android:name="CreateSlimShortcut"
             android:label="@string/slim_shortcut_picker"
             android:icon="@drawable/slim_lock"
-            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
+            android:theme="@style/Theme.Holo.Dialog.NoActionBar.Styled"
             android:excludeFromRecents="true"
             android:configChanges="orientation|keyboardHidden|screenSize" >
             <intent-filter>
@@ -161,7 +161,7 @@
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:taskAffinity="com.android.settings.slim.service.BypassAlarm"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+            android:theme="@style/Theme.NoTitleBar.Fullscreen.Styled" />
 
         <!-- Wireless Controls -->
 
@@ -245,7 +245,7 @@
 
         <activity android:name=".wifi.WifiSettingsForSetupWizardXL"
                 android:uiOptions="splitActionBarWhenNarrow"
-                android:theme="@android:style/Theme.Holo.NoActionBar"
+                android:theme="@style/Theme.Holo.NoActionBar.Styled"
                 android:screenOrientation="behind"
                 android:clearTaskOnLaunch="true"
                 android:windowSoftInputMode="adjustResize"
@@ -273,7 +273,7 @@
         </activity>
 
         <activity android:name=".wifi.WifiInfo"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:theme="@style/Theme.Holo.DialogWhenLarge.Styled"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$WifiSettingsActivity">
             <intent-filter>
@@ -284,7 +284,7 @@
         </activity>
 
         <activity android:name=".wifi.WifiConfigInfo"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:theme="@style/Theme.Holo.DialogWhenLarge.Styled"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings$WifiSettingsActivity">
             <intent-filter>
@@ -295,7 +295,7 @@
         </activity>
 
         <activity android:name=".wifi.WifiAPITest"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge">
+                android:theme="@style/Theme.Holo.DialogWhenLarge.Styled">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
@@ -304,7 +304,7 @@
         </activity>
 
         <activity android:name=".wifi.WifiStatusTest"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge">
+                android:theme="@style/Theme.Holo.DialogWhenLarge.Styled">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
@@ -371,7 +371,7 @@
 
         <activity android:name=".bluetooth.DevicePickerActivity"
                 android:uiOptions="splitActionBarWhenNarrow"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:theme="@style/Theme.Holo.DialogWhenLarge.Styled"
                 android:label="@string/device_picker"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -476,7 +476,7 @@
 
         <activity android:name="DateTimeSettingsSetupWizard"
                   android:label="@string/date_and_time"
-                  android:theme="@android:style/Theme.Holo.NoActionBar"
+                  android:theme="@style/Theme.Holo.NoActionBar.Styled"
                   android:screenOrientation="behind">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -599,7 +599,7 @@
 
         <activity android:name=".inputmethod.UserDictionaryAddWordActivity"
                   android:label="@string/user_dict_settings_title"
-                  android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
+                  android:theme="@style/Theme.Holo.Dialog.NoActionBar.Styled"
                   android:windowSoftInputMode="stateVisible"
                   android:noHistory="true"
                   android:excludeFromRecents="true">
@@ -685,7 +685,7 @@
         </activity-alias>
 
         <activity android:name="Settings$DeviceInfoSettingsActivity"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:theme="@style/Theme.Holo.DialogWhenLarge.Styled"
                 android:label="@string/device_info_settings"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
@@ -703,7 +703,7 @@
 
         <activity android:name="SettingsLicenseActivity"
                 android:label="@string/settings_license_activity_title"
-                android:theme="@android:style/Theme.Holo.Panel"
+                android:theme="@style/Theme.Holo.Panel.Styled"
                 android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.settings.LICENSE" />
@@ -1000,7 +1000,7 @@
         </activity>
 
         <activity android:name="SetFullBackupPassword"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:theme="@style/Theme.Holo.DialogWhenLarge.Styled"
                 android:exported="false">
         </activity>
 
@@ -1052,7 +1052,7 @@
 
         <activity android:name="DeviceAdminAdd"
                 android:label="@string/device_admin_add_title"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:theme="@style/Theme.Holo.DialogWhenLarge.Styled"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
@@ -1062,7 +1062,7 @@
 
         <activity android:name="IccLockSettings"
                 android:label="@string/sim_lock_settings"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:theme="@style/Theme.Holo.DialogWhenLarge.Styled"
                 android:process="com.android.phone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1178,7 +1178,7 @@
         </activity>
 
         <activity android:name=".deviceinfo.MiscFilesHandler"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"/>
+                android:theme="@style/Theme.Holo.DialogWhenLarge.Styled"/>
 
         <activity android:name="Settings$ApnEditorActivity"
                 android:label="@string/apn_edit"
@@ -1282,7 +1282,7 @@
         </activity-alias>
 
         <activity android:name=".AppPicker" android:label="@string/select_application"
-                android:theme="@android:style/Theme.Holo.Dialog" />
+                android:theme="@style/Theme.Holo.Dialog.Styled" />
 
         <activity android:name="Settings$UsbSettingsActivity"
                 android:label="@string/storage_title_usb"
@@ -1605,7 +1605,7 @@
 
         <activity android:name=".accounts.SyncSettingsActivity"
             android:label="@string/account_sync_settings_title"
-            android:theme="@android:style/Theme.Holo.Dialog">
+            android:theme="@style/Theme.Holo.Dialog.Styled">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.SYNC_SETTINGS" />
@@ -1629,13 +1629,13 @@
         <activity android:name="com.android.settings.accounts.ChooseAccountActivity"
             android:label="@string/header_add_an_account"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Holo.DialogWhenLarge"/>
+            android:theme="@style/Theme.Holo.DialogWhenLarge.Styled"/>
 
         <activity android:name=".CryptKeeper"
                   android:immersive="true"
                   android:launchMode="singleTop"
                   android:excludeFromRecents="true"
-                  android:theme="@android:style/Theme.Holo.NoActionBar"
+                  android:theme="@style/Theme.Holo.NoActionBar.Styled"
                   android:configChanges="keyboard|keyboardHidden|uiMode"
                   android:windowSoftInputMode="adjustResize">
             <intent-filter android:priority="10">
@@ -1665,7 +1665,7 @@
 
          <!-- "Blacklist settings" UI, used only on voice-capable phone devices. -->
         <activity android:name="Settings$BlacklistSettingsActivity"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:theme="@style/Theme.Holo.DialogWhenLarge.Styled"
                 android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/blacklist_title"
                 android:taskAffinity=""
