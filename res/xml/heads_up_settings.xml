@@ -19,14 +19,9 @@
     <CheckBoxPreference
         android:key="heads_up_master_switch"
         android:title="@string/heads_up_master_switch"
+        android:summary="@string/heads_up_note_summary"
         android:persistent="false"
         android:defaultValue="false" />
-
-    <Preference
-        style="?android:preferenceInformationStyle"
-        android:title="@string/heads_up_note_title"
-        android:summary="@string/heads_up_note_summary"
-        android:selectable="false" />
 
     <CheckBoxPreference
         android:key="heads_up_exclude_from_lock_screen"
