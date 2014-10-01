@@ -1206,7 +1206,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
 
     <!-- Recent panel -->
-    <string name="recent_panel_category">Recent apps panel</string>
+    <string name="recent_panel_category">SlimRecents</string>
     <string name="recent_panel_scale_title">Size</string>
     <string name="recent_panel_scale_summary">Recent apps panel size in percent</string>
     <string name="recent_panel_100">100% (default)</string>
