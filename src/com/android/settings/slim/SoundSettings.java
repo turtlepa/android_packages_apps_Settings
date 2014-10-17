@@ -49,6 +49,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
     private static final String KEY_SAFE_HEADSET_VOLUME = "safe_headset_volume";
+    private static final String KEY_SAFE_HEADSET_VOLUME_RESTORE = "safe_headset_volume_restore";
     private static final String KEY_POWER_NOTIFICATIONS = "power_notifications";
     private static final String KEY_POWER_NOTIFICATIONS_VIBRATE = "power_notifications_vibrate";
     private static final String KEY_POWER_NOTIFICATIONS_RINGTONE = "power_notifications_ringtone";
@@ -65,6 +66,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
     private CheckBoxPreference mVolBtnMusicCtrl;
     private CheckBoxPreference mSafeHeadsetVolume;
+    private CheckBoxPreference mSafeHeadsetVolumeRestore;
     private CheckBoxPreference mPowerSounds;
     private CheckBoxPreference mPowerSoundsVibrate;
     private Preference mPowerSoundsRingtone;
@@ -87,6 +89,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mSafeHeadsetVolume.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.SAFE_HEADSET_VOLUME, 1) != 0);
         mSafeHeadsetVolume.setOnPreferenceChangeListener(this);
+
+        mSafeHeadsetVolumeRestore = (CheckBoxPreference) findPreference(KEY_SAFE_HEADSET_VOLUME_RESTORE);
+        mSafeHeadsetVolumeRestore.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.SAFE_HEADSET_VOLUME_RESTORE, 1) != 0);
+        mSafeHeadsetVolumeRestore.setOnPreferenceChangeListener(this);
 
         // power state change notification sounds
         mPowerSounds = (CheckBoxPreference) findPreference(KEY_POWER_NOTIFICATIONS);
@@ -178,6 +185,12 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             } else {
                 showDialogInner(DLG_SAFE_HEADSET_VOLUME);
             }
+        }
+        if (KEY_SAFE_HEADSET_VOLUME_RESTORE.equals(key)) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.SAFE_HEADSET_VOLUME_RESTORE,
+                    (Boolean) objValue ? 1 : 0);
+
         }
         if (KEY_POWER_NOTIFICATIONS.equals(key)) {
             Settings.Global.putInt(getContentResolver(),

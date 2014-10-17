@@ -69,4 +69,7 @@
     <string name="notification_force_expand_title">Force expanded notification</string>
     <string name="notification_force_expand_summary">Force expanded notifications if supported</string>
 
+    <!-- Safe headset volume restore checkbox -->
+    <string name="safe_headset_volume_restore_title">Reduce headset volume on connection</string>
+
 </resources>
