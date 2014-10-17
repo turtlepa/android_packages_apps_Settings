@@ -70,6 +70,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_WAKEUP_CATEGORY = "category_wakeup_options";
     private static final String KEY_SCREEN_OFF_GESTURE_SETTINGS = "screen_off_gesture_settings";
+    private static final String KEY_DUAL_PANEL = "force_dualpanel";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -91,6 +92,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
     private PreferenceCategory mWakeUpOptions;
     private CheckBoxPreference mProximityWake;
+    private CheckBoxPreference mDualPanel;
 
     private final Configuration mCurConfig = new Configuration();
 
@@ -137,6 +139,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref = (FontDialogPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
+
+        mDualPanel = (CheckBoxPreference) findPreference(KEY_DUAL_PANEL);
+        mDualPanel.setChecked(Settings.System.getBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, false));
 
         mLightOptions = (PreferenceCategory) prefSet.findPreference(KEY_LIGHT_OPTIONS);
         mNotificationPulse = (CheckBoxPreference) findPreference(KEY_NOTIFICATION_PULSE);
@@ -466,6 +471,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             boolean value = mNotificationPulse.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE,
                     value ? 1 : 0);
+            return true;
+        } else if (preference == mDualPanel) {
+            Settings.System.putBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, ((CheckBoxPreference) preference).isChecked());
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
