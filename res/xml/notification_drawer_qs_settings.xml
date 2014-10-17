@@ -53,7 +53,7 @@
          <extra android:name="fragment" android:value="com.android.settings.slim.fragments.NotificationsShortcutFragment" />
      </PreferenceScreen>
 
-    <CheckBoxPreference
+    <com.android.settings.djl.SystemSettingCheckBoxPreference
         android:key="force_expanded_notifications"
         android:title="@string/notification_force_expand_title"
         android:summary="@string/notification_force_expand_summary"
