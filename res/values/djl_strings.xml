@@ -56,5 +56,9 @@
     <string name="heads_up_note_summary">Enable Heads Up notifications</string>
     <!-- Heads-up disable on lockscreen -->
     <string name="heads_up_exclude_from_lock_screen">Disable on lockscreen</string>
+ 
+    <!-- Force dual panel -->
+    <string name="force_dualpanel_title">Force dual panel</string>
+    <string name="force_dualpanel_summary">This will enable/disable dual panel settings"</string> 
 
 </resources>
