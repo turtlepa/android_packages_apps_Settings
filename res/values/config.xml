@@ -33,4 +33,6 @@
         Setting to false will disable Volume Rocker Wake support -->
     <bool name="config_show_volumeRockerWake">true</bool>
 
+    <!-- Volume rocker support. Some devices does not have volume rocker. -->
+    <bool name="has_volume_rocker">true</bool>
 </resources>
