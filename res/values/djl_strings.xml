@@ -60,5 +60,9 @@
     <!-- Force dual panel -->
     <string name="force_dualpanel_title">Force dual panel</string>
     <string name="force_dualpanel_summary">This will enable/disable dual panel settings"</string> 
+ 
+    <!-- Swap volume buttons when the screen is rotated -->
+    <string name="swap_volume_buttons_title">Reorient volume buttons</string>
+    <string name="swap_volume_buttons_summary">Swap volume buttons when the screen is rotated</string>
 
 </resources>
