@@ -46,7 +46,7 @@ public class DisplayRotation extends SettingsPreferenceFragment implements OnPre
     private CheckBoxPreference mRotation90Pref;
     private CheckBoxPreference mRotation180Pref;
     private CheckBoxPreference mRotation270Pref;
-    private CheckBoxPreference mSwapVolumeButtons
+    private CheckBoxPreference mSwapVolumeButtons;
 
     public static final int ROTATION_0_MODE = 1;
     public static final int ROTATION_90_MODE = 2;
