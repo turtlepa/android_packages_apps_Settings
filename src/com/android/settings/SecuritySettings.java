@@ -37,7 +37,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
-import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
@@ -45,7 +44,6 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.security.KeyStore;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.telephony.util.BlacklistUtils;
@@ -53,15 +51,8 @@ import com.android.internal.util.slim.DeviceUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 
-import net.margaritov.preference.colorpicker.ColorPickerPreference;
-
-import com.android.settings.slim.AppMultiSelectListPreference;
-
-import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Gesture lock pattern settings.
@@ -69,18 +60,6 @@ import java.util.Set;
 public class SecuritySettings extends RestrictedSettingsFragment
         implements OnPreferenceChangeListener, DialogInterface.OnClickListener {
     static final String TAG = "SecuritySettings";
-    private static final String KEY_SEE_THROUGH = "see_through";
-
-    private static final String LOCKSCREEN_NOTIFICATIONS = "lockscreen_notifications";
-    private static final String LOCKSCREEN_NOTIFICATIONS_POCKET_MODE = "lockscreen_notifications_pocket_mode";
-    private static final String LOCKSCREEN_NOTIFICATIONS_WAKE_ON_NOTIFICATION =
-            "lockscreen_notifications_wake_on_notification";
-    private static final String LOCKSCREEN_NOTIFICATIONS_PRIVACY_MODE = "lockscreen_notifications_privacy_mode";
-    private static final String LOCKSCREEN_NOTIFICATIONS_HEIGHT = "lockscreen_notifications_height";
-    private static final String LOCKSCREEN_NOTIFICATIONS_COLOR = "lockscreen_notifications_color";
-    private static final String LOCKSCREEN_NOTIFICATIONS_TYPE = "lockscreen_notifications_type";
-    private static final String LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS =
-            "lockscreen_notifications_excluded_apps";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
@@ -126,17 +105,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private DialogInterface mWarnInstallApps;
     private CheckBoxPreference mToggleVerifyApps;
     private ListPreference mAdvancedReboot;
-
-    private CheckBoxPreference mSeeThrough;
-
-    private CheckBoxPreference mLockscreenNotifications;
-    private ListPreference mLockscreenNotificationsPocketMode;
-    private CheckBoxPreference mLockscreenNotificationsWakeOnNotification;
-    private CheckBoxPreference mLockscreenNotificationsPrivacyMode;
-    private ListPreference mLockscreenNotificationsHeight;
-    private MultiSelectListPreference mLockscreenNotificationsType;
-    private ColorPickerPreference mLockscreenNotificationsColor;
-    private AppMultiSelectListPreference mLockscreenNotificationsExcludedApps;
 
     private Preference mNotificationAccess;
 
@@ -191,89 +159,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
                 mEncryption.setFragment("com.android.settings.CryptKeeperSettings");
                 break;
             }
-        }
-
-        // lockscreen see through
-        mSeeThrough = (CheckBoxPreference) root.findPreference(KEY_SEE_THROUGH);
-        if (mSeeThrough != null) {
-            mSeeThrough.setChecked(Settings.System.getInt(getContentResolver(),
-                    Settings.System.LOCKSCREEN_SEE_THROUGH, 0) == 1);
-        }
-
-        // Lockscreen notification
-        mLockscreenNotifications = (CheckBoxPreference) root.findPreference(
-                LOCKSCREEN_NOTIFICATIONS);
-        if (mLockscreenNotifications != null) {
-            mLockscreenNotifications.setChecked(Settings.System.getIntForUser(getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS, 0, UserHandle.USER_CURRENT) == 1);
-            mLockscreenNotifications.setOnPreferenceChangeListener(this);
-        }
-
-        // Lockscreen notification: pocket mode
-        mLockscreenNotificationsPocketMode = (ListPreference) root.findPreference(
-                LOCKSCREEN_NOTIFICATIONS_POCKET_MODE);
-        if (mLockscreenNotificationsPocketMode != null) {
-            final int pocketModeValue = Settings.System.getIntForUser(getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS_POCKET_MODE, 2, UserHandle.USER_CURRENT);
-            mLockscreenNotificationsPocketMode.setValue(String.valueOf(pocketModeValue));
-            mLockscreenNotificationsPocketMode.setOnPreferenceChangeListener(this);
-        }
-
-        // Lockscreen notification: wake on
-        mLockscreenNotificationsWakeOnNotification = (CheckBoxPreference) root.findPreference(
-                LOCKSCREEN_NOTIFICATIONS_WAKE_ON_NOTIFICATION);
-        if (mLockscreenNotificationsWakeOnNotification != null) {
-            mLockscreenNotificationsWakeOnNotification.setChecked(Settings.System.getIntForUser(
-                    getContentResolver(), Settings.System.LOCKSCREEN_NOTIFICATIONS_WAKE_ON_NOTIFICATION,
-                    0, UserHandle.USER_CURRENT) == 1);
-            mLockscreenNotificationsWakeOnNotification.setOnPreferenceChangeListener(this);
-        }
-
-        // Lockscreen notification: privacy mode
-        mLockscreenNotificationsPrivacyMode = (CheckBoxPreference) root.findPreference(
-                LOCKSCREEN_NOTIFICATIONS_PRIVACY_MODE);
-        if (mLockscreenNotificationsPrivacyMode != null) {
-            mLockscreenNotificationsPrivacyMode.setChecked(Settings.System.getIntForUser(
-                    getContentResolver(), Settings.System.LOCKSCREEN_NOTIFICATIONS_PRIVACY_MODE,
-                    0, UserHandle.USER_CURRENT) == 1);
-            mLockscreenNotificationsPrivacyMode.setOnPreferenceChangeListener(this);
-        }
-
-        // Lockscreen notification: height
-        mLockscreenNotificationsHeight = (ListPreference) root.findPreference(
-                LOCKSCREEN_NOTIFICATIONS_HEIGHT);
-        if (mLockscreenNotificationsHeight != null) {
-            final int lockscreenNotificationsHeight = Settings.System.getIntForUser(getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS_HEIGHT, 0, UserHandle.USER_CURRENT);
-            mLockscreenNotificationsHeight.setValue(String.valueOf(lockscreenNotificationsHeight));
-            mLockscreenNotificationsHeight.setOnPreferenceChangeListener(this);
-        }
-
-        // Lockscreen notification: type
-        mLockscreenNotificationsType = (MultiSelectListPreference) root.findPreference(
-                LOCKSCREEN_NOTIFICATIONS_TYPE);
-        if (mLockscreenNotificationsType != null) {
-            mLockscreenNotificationsType.setOnPreferenceChangeListener(this);
-            mLockscreenNotificationsColor = (ColorPickerPreference) root.findPreference(
-                    LOCKSCREEN_NOTIFICATIONS_COLOR);
-        }
-
-        // Lockscreen notification: color
-        if (mLockscreenNotificationsColor != null) {
-            mLockscreenNotificationsColor.setOnPreferenceChangeListener(this);
-            final int notifColor = Settings.System.getIntForUser(getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS_COLOR, -2, UserHandle.USER_CURRENT);
-            setPreferenceSummary(mLockscreenNotificationsColor, getResources().getString(
-                    R.string.lockscreen_notifications_color_summary), notifColor);
-        }
-
-        // Lockscreen notification: exclude apps
-        mLockscreenNotificationsExcludedApps = (AppMultiSelectListPreference) root.findPreference(
-                LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS);
-        if (mLockscreenNotificationsExcludedApps != null) {
-            final Set<String> excludedApps = getExcludedApps();
-            if (excludedApps != null) mLockscreenNotificationsExcludedApps.setValues(excludedApps);
-            mLockscreenNotificationsExcludedApps.setOnPreferenceChangeListener(this);
         }
 
         // Do not display SIM lock for devices without an Icc card
@@ -378,17 +263,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
         }
         return root;
     }
-
-    private void setPreferenceSummary(
-              Preference preference, String defaultSummary, int value) {
-          if (value == -2) {
-              preference.setSummary(defaultSummary + " (" + getResources().getString(
-                      R.string.default_string) + ")");
-          } else {
-              String hexColor = String.format("#%08x", (0xffffffff & value));
-              preference.setSummary(defaultSummary + " (" + hexColor + ")");
-          }
-      }
 
     private int getNumEnabledNotificationListeners() {
         final String flat = Settings.Secure.getString(getContentResolver(),
@@ -498,9 +372,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
             } else {
                 setNonMarketAppsAllowed(false);
             }
-        } else if (preference == mSeeThrough) {
-            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH,
-                    mSeeThrough.isChecked() ? 1 : 0);
         } else if (KEY_TOGGLE_VERIFY_APPLICATIONS.equals(key)) {
             Settings.Global.putInt(getContentResolver(), Settings.Global.PACKAGE_VERIFIER_ENABLE,
                     mToggleVerifyApps.isChecked() ? 1 : 0);
@@ -523,67 +394,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
                     Integer.valueOf((String) value));
             mAdvancedReboot.setValue(String.valueOf(value));
             mAdvancedReboot.setSummary(mAdvancedReboot.getEntry());
-        } else if (preference == mLockscreenNotifications) {
-            Settings.System.putIntForUser(getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS,
-                    ((Boolean) value) ? 1 : 0, UserHandle.USER_CURRENT);
-        } else if (preference == mLockscreenNotificationsPocketMode) {
-            int userVal = Integer.valueOf((String) value);
-            Settings.System.putIntForUser(getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS_POCKET_MODE,
-                    userVal, UserHandle.USER_CURRENT);
-            updateLockscreenNotificationsPocketModeSummary(userVal);
-        } else if (preference == mLockscreenNotificationsWakeOnNotification) {
-            Settings.System.putIntForUser(getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS_WAKE_ON_NOTIFICATION,
-                    ((Boolean) value) ? 1 : 0, UserHandle.USER_CURRENT);
-        } else if (preference == mLockscreenNotificationsPrivacyMode) {
-            Settings.System.putIntForUser(getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS_PRIVACY_MODE,
-                    ((Boolean) value) ? 1 : 0, UserHandle.USER_CURRENT);
-        } else if (preference == mLockscreenNotificationsHeight) {
-            int userVal = Integer.valueOf((String) value);
-            Settings.System.putIntForUser(getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS_HEIGHT,
-                    userVal, UserHandle.USER_CURRENT);
-        } else if (preference == mLockscreenNotificationsType) {
-            HashSet<String> h = (HashSet) value;
-            String[] array = h.toArray(new String[h.size()]);
-            Settings.System.putStringForUser(getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS_TYPE,
-                    Arrays.toString(array), UserHandle.USER_CURRENT);
-        } else if (preference == mLockscreenNotificationsColor) {
-            int val = Integer.valueOf(String.valueOf(value));
-            Settings.System.putIntForUser(getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS_COLOR, val, UserHandle.USER_CURRENT);
-            setPreferenceSummary(preference, getResources().getString(
-                    R.string.lockscreen_notifications_color_summary), val);
-        } else if (preference == mLockscreenNotificationsExcludedApps) {
-            storeExcludedApps((Set<String>) value);
         }
         return true;
-    }
-
-    private Set<String> getExcludedApps() {
-        String excluded = Settings.System.getStringForUser(getContentResolver(),
-                Settings.System.LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS, UserHandle.USER_CURRENT);
-
-        if (TextUtils.isEmpty(excluded)) return null;
-
-        return new HashSet<String>(Arrays.asList(excluded.split("\\|")));
-    }
-
-    private void storeExcludedApps(Set<String> values) {
-        StringBuilder builder = new StringBuilder();
-        String delimiter = "";
-        for (String value : values) {
-            builder.append(delimiter);
-            builder.append(value);
-            delimiter = "|";
-        }
-        Settings.System.putStringForUser(getContentResolver(),
-                Settings.System.LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS,
-                builder.toString(), UserHandle.USER_CURRENT);
     }
 
     @Override
@@ -598,24 +410,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
             } else {
                 mBlacklist.setSummary(R.string.blacklist_summary_disabled);
             }
-        }
-    }
-
-    private void updateLockscreenNotificationsPocketModeSummary(int value) {
-        int resId;
-        if (value == 0) {
-            // Pocket mode always on
-            mLockscreenNotificationsPocketMode.setSummary(getResources().getString(R.string.pocket_mode_modes_alwayson_summary));
-        } else {
-        switch (value) {
-            case 1:
-                resId = R.string.pocket_mode_modes_unreadnotificationsonly_summary;
-                break;
-            default:
-                resId = R.string.pocket_mode_modes_disabled;
-                break;
-            }
-        mLockscreenNotificationsPocketMode.setSummary(getResources().getString(resId));
         }
     }
 }
